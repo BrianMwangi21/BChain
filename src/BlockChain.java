@@ -35,10 +35,12 @@ public class BlockChain {
 
             // Compare the saved hash and re-calculated hash
             if( !currentBlock.hash.equals(currentBlock.calculateHash()) ) {
+                System.out.println("Current hashes are not equal");
                 return false;
             }
 
             if( !currentBlock.previousHash.equals(previousBlock.hash) ) {
+                System.out.println("Previous hashes are not equal");
                 return false;
             }
 
