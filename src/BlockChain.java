@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class BlockChain {
     private ArrayList<Block> blockchain;
     private Scanner input;
+    private int difficulty = 5;
 
     public BlockChain() {
         this.blockchain = new ArrayList<>();
@@ -14,17 +15,21 @@ public class BlockChain {
 
     private void generateGenesisBlock() {
         blockchain.add( new Block("0", "This is thy Genesis Block") );
+        blockchain.get(0).mineBlock(difficulty);
     }
 
     public void createBlock() {
         System.out.print("Enter data to enter in new block : ");
         String data = input.nextLine();
         blockchain.add( new Block( getLastBlock().hash, data ) );
+        blockchain.get(getLastBlockIndex()).mineBlock(difficulty);
     }
 
     public Block getLastBlock() {
         return blockchain.get( blockchain.size() - 1 );
     }
+
+    public int getLastBlockIndex() { return blockchain.size() - 1; }
 
     public Boolean isChainValid() {
         Block previousBlock, currentBlock;
