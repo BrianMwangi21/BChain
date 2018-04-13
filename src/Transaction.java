@@ -7,16 +7,16 @@ public class Transaction {
     public float value;
     public byte[] signature;
 
-    // public ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
-    // public ArrayList<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
+    public ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
+    public ArrayList<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
 
     private static int sequence = 0;
 
-    public Transaction(PublicKey from, PublicKey to, float value, ArrayList<Block> inputs ) {
+    public Transaction(PublicKey from, PublicKey to, float value, ArrayList<TransactionInput> inputs ) {
         this.sender = from;
         this.recepient = to;
         this.value = value;
-        // this.inputs = inputs;
+        this.inputs = inputs;
     }
 
     // Calculates hash used as Id
