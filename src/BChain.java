@@ -1,19 +1,24 @@
+import java.security.Security;
+
 public class BChain {
+    public static Wallet walletA, walletB;
 
     public static void main(String[] args) {
-        BlockChain bchain = new BlockChain();
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
-        for( int i = 0; i < 3; ++i ) {
-            bchain.createBlock();
-        }
+        walletA = new Wallet();
+        walletB = new Wallet();
 
-        bchain.printDetails();
+        // Print sample keys
+        System.out.println("Keys : ");
+        System.out.println("Public A : " + StringUtil.getStringFromKey(walletA.publicKey));
+        System.out.println("Public B : " + StringUtil.getStringFromKey(walletB.publicKey));
 
-        // Check if chain is valid
-        if( bchain.isChainValid() ) {
-            System.out.println("Chain is valid");
-        }else {
-            System.out.println("Chain is not valid");
-        }
+        // Test transaction
+        Transaction transaction = new Transaction(walletA.publicKey, walletB.publicKey, 5, null);
+        transaction.generateSignature(walletA.privateKey);
+
+        // Verify
+        System.out.println("Result : " + transaction.verifySignature());
     }
 }

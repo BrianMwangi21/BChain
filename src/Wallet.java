@@ -3,7 +3,7 @@ import java.security.spec.ECGenParameterSpec;
 
 public class Wallet {
     public PublicKey publicKey;
-    private PrivateKey privateKey;
+    public PrivateKey privateKey;
 
     public Wallet() {
         generateKeyPair();
