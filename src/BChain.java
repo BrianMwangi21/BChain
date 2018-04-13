@@ -8,5 +8,12 @@ public class BChain {
         }
 
         bchain.printDetails();
+
+        // Check if chain is valid
+        if( bchain.isChainValid() ) {
+            System.out.println("Chain is valid");
+        }else {
+            System.out.println("Chain is not valid");
+        }
     }
 }

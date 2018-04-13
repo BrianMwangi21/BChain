@@ -26,6 +26,27 @@ public class BlockChain {
         return blockchain.get( blockchain.size() - 1 );
     }
 
+    public Boolean isChainValid() {
+        Block previousBlock, currentBlock;
+
+        for( int i = 1; i < blockchain.size(); ++i ) {
+            previousBlock = blockchain.get(i - 1);
+            currentBlock = blockchain.get( i );
+
+            // Compare the saved hash and re-calculated hash
+            if( !currentBlock.hash.equals(currentBlock.calculateHash()) ) {
+                return false;
+            }
+
+            if( !currentBlock.previousHash.equals(previousBlock.hash) ) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
     public void printDetails() {
         String details = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
         System.out.println(details);
